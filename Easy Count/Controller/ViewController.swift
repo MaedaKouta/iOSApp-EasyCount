@@ -36,8 +36,8 @@ class ViewController: UIViewController {
         downGradientColor.frame = self.view.bounds
         countDownButton.layer.insertSublayer(downGradientColor, at:0)
     }
-
-    @IBAction func countUp(_ sender: Any) {
+    
+    @IBAction func pressUpButton(_ sender: Any) {
         //カウントの追加,Labelの変更,Userdefaultへの登録
         count += 1
         countLabel.fadeTransition(0.1)
@@ -52,7 +52,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func countDown(_ sender: Any) {
+    
+    @IBAction func pressDownButton(_ sender: Any) {
         //カウントの減少,Labelの変更,Userdefaultへの登録
         count -= 1
         countLabel.fadeTransition(0.1)
@@ -67,7 +68,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func countReset(_ sender: Any) {
+    @IBAction func pressResetButton(_ sender: Any) {
         //カウントのリセット,Labelの変更,Userdefaultへの登録
         count = 0
         countLabel.fadeTransition(0.1)
