@@ -9,23 +9,32 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var countLabel: UILabel!
-    @IBOutlet weak var countUpButton: UIButton!
-    @IBOutlet weak var countDownButton: UIButton!
 
-    var count = 0
-    var upGradientColor:CAGradientLayer!
-    var downGradientColor:CAGradientLayer!
-    var soundPlay = SoundPlay()  //サウンドのインスタンス
-    var touchSense = TouchSense()  //触覚フィードバックのインスタンス
-    var gradation = Gradation()  //グラデーションのインスタンス
-    
+    enum countType {
+        case up
+        case down
+        case reset
+    }
+
+    @IBOutlet private weak var countNumberTextLabel: UILabel!
+    @IBOutlet private weak var countUpButton: UIButton!
+    @IBOutlet private weak var countDownButton: UIButton!
+
+    private var countNumberInt: Int = 0
+    private var upGradientColor: CAGradientLayer!
+    private var downGradientColor: CAGradientLayer!
+    private let soundPlay = SoundPlay()  //サウンドのインスタンス
+    private let touchSense = TouchSense()  //触覚フィードバックのインスタンス
+    private let gradation = Gradation()  //グラデーションのインスタンス
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //カウントの設定
-        count = UserDefaults.standard.integer(forKey: "count")
-        countLabel.text = String(count)
+        
+        countNumberTextLabel.adjustsFontSizeToFitWidth = true
+        countNumberInt = UserDefaults.standard.integer(forKey: "countNumberInt")
+        UIApplication.shared.isIdleTimerDisabled = UserDefaults.standard.bool(forKey: "screenLock")
+        countNumberTextLabel.text = String(countNumberInt)
+        
 
         //UPグラーデションを配置
         upGradientColor = gradation.upGradient()
@@ -37,58 +46,65 @@ class ViewController: UIViewController {
         countDownButton.layer.insertSublayer(downGradientColor, at:0)
     }
     
-    @IBAction func pressUpButton(_ sender: Any) {
-        //カウントの追加,Labelの変更,Userdefaultへの登録
-        count += 1
-        countLabel.fadeTransition(0.1)
-        countLabel.text = String(count)
-        UserDefaults.standard.set(self.count, forKey: "count")
-        //触覚フィードバック・サウンドのオンオフ判定から再生
-        if(UserDefaults.standard.bool(forKey: "vibrateValue") == true){
-            touchSense.vibrate()
-        }
-        if(UserDefaults.standard.bool(forKey: "soundValue") == true){
-            soundPlay.play(fileName: "kako_up", extentionName: "mp3")
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        countNumberInt = UserDefaults.standard.integer(forKey: "initialNumber")
+        countNumberTextLabel.text = String(countNumberInt)
     }
-    
-    
-    @IBAction func pressDownButton(_ sender: Any) {
-        //カウントの減少,Labelの変更,Userdefaultへの登録
-        count -= 1
-        countLabel.fadeTransition(0.1)
-        countLabel.text = String(count)
-        UserDefaults.standard.set(self.count, forKey: "count")
-        //触覚フィードバック・サウンドのオンオフ判定から再生
-        if(UserDefaults.standard.bool(forKey: "vibrateValue") == true){
-            touchSense.vibrate()
-        }
-        if(UserDefaults.standard.bool(forKey: "soundValue") == true){
-            soundPlay.play(fileName: "kako_down", extentionName: "mp3")
-        }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.set(self.countNumberInt, forKey: "countNumberInt")
     }
-    
-    @IBAction func pressResetButton(_ sender: Any) {
-        //カウントのリセット,Labelの変更,Userdefaultへの登録
-        count = 0
-        countLabel.fadeTransition(0.1)
-        countLabel.text = String(count)
-        UserDefaults.standard.set(self.count, forKey: "count")
-        //触覚フィードバック・サウンドのオンオフ判定から再生
-        if(UserDefaults.standard.bool(forKey: "vibrateValue") == true){
-            touchSense.vibrate()
-        }
-        if(UserDefaults.standard.bool(forKey: "soundValue") == true){
-            soundPlay.play(fileName: "kako_reset", extentionName: "mp3")
-        }
+
+    @IBAction private func pressUpButton(_ sender: Any) {
+        buttonAction(countType: countType.up)
+        print(UIApplication.shared.isIdleTimerDisabled)
     }
-    
+
+    @IBAction private func pressDownButton(_ sender: Any) {
+        buttonAction(countType: countType.down)
+    }
+
+    @IBAction private func pressResetButton(_ sender: Any) {
+        buttonAction(countType: countType.reset)
+    }
+
     //設定画面への画面遷移
-    @IBAction func setting(_ sender: Any) {
+    @IBAction private func setting(_ sender: Any) {
         let nextView = storyboard?.instantiateViewController(withIdentifier: "Next") as! SettingTableViewController
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: true, completion: nil)
     }
+
+    private func buttonAction(countType: countType) {
+        var soundName = ""
+        
+        switch countType {
+        case .up:
+            countNumberInt += 1
+            soundName = "soundUp"
+        case .down:
+            countNumberInt -= 1
+            soundName = "soundUp"
+        case .reset:
+            countNumberInt = UserDefaults.standard.integer(forKey: "initialNumber")
+            soundName = "soundUp"
+        }
+        
+        // TextLabelへの表示
+        countNumberTextLabel.fadeTransition(0.1)
+        countNumberTextLabel.text = String(countNumberInt)
+        
+        // 設定項目のSoundとVibrationを判定
+        if(UserDefaults.standard.bool(forKey: "vibrateValue") == true){
+            touchSense.vibrate()
+        }
+        if(UserDefaults.standard.bool(forKey: "soundValue") == true){
+            soundPlay.play(fileName: soundName, extentionName: "mp3")
+        }
+    }
+
 }
 
 //カウントアップのアニメーションをextention

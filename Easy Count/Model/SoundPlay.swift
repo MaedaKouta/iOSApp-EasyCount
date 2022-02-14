@@ -9,36 +9,41 @@ import Foundation
 import AVFoundation
 
 class SoundPlay{
-    
-    var audioPlayerInstance : AVAudioPlayer! = nil
-    
+
+    var audioPlayer : AVAudioPlayer!
+
     func play(fileName:String, extentionName:String){
+
         //パスを生成
         guard let soundFilePath = Bundle.main.path(forResource:fileName, ofType: extentionName) else {
-            print("サウンドファイルが見つかりません。")
+            print("サウンドファイルが見つからない")
             return
         }
-        let sound:URL = URL(fileURLWithPath: soundFilePath)
  
         // AVAudioPlayerのインスタンスを作成,ファイルの読み込み
         do {
-            audioPlayerInstance = try AVAudioPlayer(contentsOf: sound, fileTypeHint:nil)
+            let sound: URL = URL(fileURLWithPath: soundFilePath)
+            audioPlayer = try AVAudioPlayer(contentsOf: sound, fileTypeHint: nil)
         } catch {
-            print("AVAudioPlayerインスタンス作成でエラー")
+            print("AVAudioPlayerInstance代入時にエラー")
         }
-        
+
         //バックミュージック流しながらでも効果音を流すコード
         do {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(AVAudioSession.Category.ambient)
             try audioSession.setActive(true)
-        } catch let error {
-                    print(error)
+        } catch {
+            print("バックミュージックを流しながら効果音を流すコードでエラー")
         }
-        
-        audioPlayerInstance.prepareToPlay()  // 再生準備
-        audioPlayerInstance.currentTime = 0  // 再生箇所を頭に移す
-        audioPlayerInstance.play()
+
+        if audioPlayer.prepareToPlay() {
+            audioPlayer.currentTime = 0
+            audioPlayer.play()
+        } else {
+            print("再生直前に失敗")
+        }
     }
+
 }
 

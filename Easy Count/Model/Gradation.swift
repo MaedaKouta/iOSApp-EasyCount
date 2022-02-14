@@ -17,7 +17,7 @@ class Gradation{
         gradientLayer.colors = gradientColors
         return gradientLayer
     }
-    
+
     func upGradient() -> CAGradientLayer{
         let topColor = UIColor(red:1.0, green:0.40, blue:0.0, alpha:1)
         let bottomColor = UIColor(red:1.0, green:1.0, blue:0.80, alpha:1)
