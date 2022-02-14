@@ -31,8 +31,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         countNumberTextLabel.adjustsFontSizeToFitWidth = true
-        countNumberInt = UserDefaults.standard.integer(forKey: "countNumberInt")
-        UIApplication.shared.isIdleTimerDisabled = UserDefaults.standard.bool(forKey: "screenLock")
+        countNumberInt = UserDefaultsKey.countNumber.get() ?? Int()
+        UIApplication.shared.isIdleTimerDisabled = UserDefaultsKey.screenLock.get() ?? Bool()
         countNumberTextLabel.text = String(countNumberInt)
         
 
@@ -48,13 +48,13 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        countNumberInt = UserDefaults.standard.integer(forKey: "initialNumber")
+        countNumberInt = UserDefaultsKey.countNumber.get() ?? Int()
         countNumberTextLabel.text = String(countNumberInt)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UserDefaults.standard.set(self.countNumberInt, forKey: "countNumberInt")
+        UserDefaultsKey.countNumber.set(value: countNumberInt)
     }
 
     @IBAction private func pressUpButton(_ sender: Any) {
@@ -88,7 +88,7 @@ class ViewController: UIViewController {
             countNumberInt -= 1
             soundName = "soundUp"
         case .reset:
-            countNumberInt = UserDefaults.standard.integer(forKey: "initialNumber")
+            countNumberInt = UserDefaultsKey.initialNumber.get() ?? Int()
             soundName = "soundUp"
         }
         
@@ -97,11 +97,11 @@ class ViewController: UIViewController {
         countNumberTextLabel.text = String(countNumberInt)
         
         // 設定項目のSoundとVibrationを判定
-        if(UserDefaults.standard.bool(forKey: "vibrateValue") == true){
-            touchSense.vibrate()
-        }
-        if(UserDefaults.standard.bool(forKey: "soundValue") == true){
+        if(UserDefaultsKey.sound.get() ?? Bool() == true){
             soundPlay.play(fileName: soundName, extentionName: "mp3")
+        }
+        if(UserDefaultsKey.vibration.get() ?? Bool() == true){
+            touchSense.vibrate()
         }
     }
 

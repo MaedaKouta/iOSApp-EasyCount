@@ -16,7 +16,7 @@
 		B9646FE526BBC94100EA8736 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9646FE326BBC94100EA8736 /* Main.storyboard */; };
 		B9646FE726BBC94200EA8736 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9646FE626BBC94200EA8736 /* Assets.xcassets */; };
 		B9646FEA26BBC94200EA8736 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9646FE826BBC94200EA8736 /* LaunchScreen.storyboard */; };
-		B97D1B4A27BA1C8200DEB6BC /* StorageUserSettingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97D1B4927BA1C8200DEB6BC /* StorageUserSettingKey.swift */; };
+		B97D1B4A27BA1C8200DEB6BC /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97D1B4927BA1C8200DEB6BC /* UserDefaultsKey.swift */; };
 		B999A0B026BCE3B3007BB4CA /* soundDown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B999A0AE26BCE3B3007BB4CA /* soundDown.mp3 */; };
 		B999A0B126BCE3B3007BB4CA /* soundUp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B999A0AF26BCE3B3007BB4CA /* soundUp.mp3 */; };
 		B999A0B626BCE5D4007BB4CA /* SoundPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B999A0B526BCE5D4007BB4CA /* SoundPlay.swift */; };
@@ -37,7 +37,7 @@
 		B9646FE626BBC94200EA8736 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9646FE926BBC94200EA8736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9646FEB26BBC94200EA8736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B97D1B4927BA1C8200DEB6BC /* StorageUserSettingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUserSettingKey.swift; sourceTree = "<group>"; };
+		B97D1B4927BA1C8200DEB6BC /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		B999A0AE26BCE3B3007BB4CA /* soundDown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundDown.mp3; sourceTree = "<group>"; };
 		B999A0AF26BCE3B3007BB4CA /* soundUp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundUp.mp3; sourceTree = "<group>"; };
 		B999A0B526BCE5D4007BB4CA /* SoundPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlay.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 				B999A0B526BCE5D4007BB4CA /* SoundPlay.swift */,
 				B9C4CFF626BCF65400DB150F /* TouchSense.swift */,
 				B99DF88526C01BAB00D3A61B /* Gradation.swift */,
-				B97D1B4927BA1C8200DEB6BC /* StorageUserSettingKey.swift */,
+				B97D1B4927BA1C8200DEB6BC /* UserDefaultsKey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,7 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B97D1B4A27BA1C8200DEB6BC /* StorageUserSettingKey.swift in Sources */,
+				B97D1B4A27BA1C8200DEB6BC /* UserDefaultsKey.swift in Sources */,
 				B9318F4726BD3B2000B3B632 /* SettingTableViewController.swift in Sources */,
 				B9646FE226BBC94100EA8736 /* ViewController.swift in Sources */,
 				B99DF88626C01BAB00D3A61B /* Gradation.swift in Sources */,

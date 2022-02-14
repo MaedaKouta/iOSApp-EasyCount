@@ -27,7 +27,7 @@ class SettingInitialNumberViewController: UIViewController {
     @IBAction func pressDecisionButton(_ sender: Any) {
         if let initialNumber = Int(InitialNumberTextField.text ?? "") {
             errorTextLabel.text = ""
-            UserDefaults.standard.set(initialNumber, forKey: "initialNumber")
+            UserDefaultsKey.initialNumber.set(value: initialNumber)
             self.navigationController?.popViewController(animated: true)
         } else {
             errorTextLabel.text = "⚠適切な数値を入力して下さい"

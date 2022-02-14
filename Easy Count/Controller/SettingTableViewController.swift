@@ -16,47 +16,46 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet private weak var initialNumberTextLabel: UILabel!
     @IBOutlet private weak var versionLabel: UILabel!
     
-    let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-    let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+    // let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    // let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        soundSwitch.isOn = UserDefaults.standard.bool(forKey: "soundValue")
-        vibrateSwitch.isOn = UserDefaults.standard.bool(forKey: "vibrateValue")
-        screenLockSwitch.isOn = UserDefaults.standard.bool(forKey: "screenLock")
-        versionLabel.text = version
+        soundSwitch.isOn = UserDefaultsKey.sound.get() ?? Bool()
+        vibrateSwitch.isOn = UserDefaultsKey.vibration.get() ?? Bool()
+        screenLockSwitch.isOn = UserDefaultsKey.screenLock.get() ?? Bool()
+        versionLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        initialNumberTextLabel.text = UserDefaults.standard.string(forKey: "initialNumber")
+        initialNumberTextLabel.text = UserDefaultsKey.initialNumber.get() ?? String()
     }
 
     @IBAction func soundSwitch(_ sender: UISwitch) {
         if (sender.isOn) {
-            UserDefaults.standard.set(true, forKey: "soundValue")
+            UserDefaultsKey.sound.set(value: true)
         }else{
-            UserDefaults.standard.set(false, forKey: "soundValue")
+            UserDefaultsKey.sound.set(value: false)
         }
     }
 
     @IBAction func vibrateSwitch(_ sender: UISwitch) {
         if (sender.isOn) {
-            UserDefaults.standard.set(true, forKey: "vibrateValue")
+            UserDefaultsKey.vibration.set(value: true)
         }else{
-            UserDefaults.standard.set(false, forKey: "vibrateValue")
+            UserDefaultsKey.vibration.set(value: false)
         }
     }
     
     @IBAction func screenLockSwitch(_ sender: UISwitch) {
         if (sender.isOn) {
             UIApplication.shared.isIdleTimerDisabled = true
-            UserDefaults.standard.set(true, forKey: "screenLock")
+            UserDefaultsKey.screenLock.set(value: true)
         }else{
             UIApplication.shared.isIdleTimerDisabled = false
-            UserDefaults.standard.set(false, forKey: "screenLock")
-            
+            UserDefaultsKey.screenLock.set(value: false)
         }
     }
     
