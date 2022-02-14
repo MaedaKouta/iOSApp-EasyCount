@@ -8,9 +8,8 @@
 import Foundation
 import AudioToolbox
 
-class TouchSense{
+class TouchSense {
     func vibrate() {
         AudioServicesPlaySystemSound(SystemSoundID(1519))
     }
 }
- 

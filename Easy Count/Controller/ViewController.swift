@@ -10,7 +10,7 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
-    enum countType {
+    enum CountType {
         case up
         case down
         case reset
@@ -23,33 +23,32 @@ class ViewController: UIViewController {
     private var countNumberInt: Int = 0
     private var upGradientColor: CAGradientLayer!
     private var downGradientColor: CAGradientLayer!
-    private let soundPlay = SoundPlay()  //サウンドのインスタンス
-    private let touchSense = TouchSense()  //触覚フィードバックのインスタンス
-    private let gradation = Gradation()  //グラデーションのインスタンス
+    private let soundPlay = SoundPlay()  // サウンドのインスタンス
+    private let touchSense = TouchSense()  // 触覚フィードバックのインスタンス
+    private let gradation = Gradation()  // グラデーションのインスタンス
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         countNumberTextLabel.adjustsFontSizeToFitWidth = true
         countNumberInt = UserDefaultsKey.countNumber.get() ?? Int()
-        UIApplication.shared.isIdleTimerDisabled = UserDefaultsKey.screenLock.get() ?? Bool()
         countNumberTextLabel.text = String(countNumberInt)
-        
 
-        //UPグラーデションを配置
+        // UPグラーデションを配置
         upGradientColor = gradation.upGradient()
         upGradientColor.frame = self.view.bounds
-        countUpButton.layer.insertSublayer(upGradientColor, at:0)
-        //DOWNグラーデションを配置
+        countUpButton.layer.insertSublayer(upGradientColor, at: 0)
+        // DOWNグラーデションを配置
         downGradientColor = gradation.downGradient()
         downGradientColor.frame = self.view.bounds
-        countDownButton.layer.insertSublayer(downGradientColor, at:0)
+        countDownButton.layer.insertSublayer(downGradientColor, at: 0)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         countNumberInt = UserDefaultsKey.countNumber.get() ?? Int()
         countNumberTextLabel.text = String(countNumberInt)
+
+        UIApplication.shared.isIdleTimerDisabled = UserDefaultsKey.screenLock.get() ?? Bool()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,58 +57,57 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func pressUpButton(_ sender: Any) {
-        buttonAction(countType: countType.up)
-        print(UIApplication.shared.isIdleTimerDisabled)
+        buttonAction(countType: CountType.up)
     }
 
     @IBAction private func pressDownButton(_ sender: Any) {
-        buttonAction(countType: countType.down)
+        buttonAction(countType: CountType.down)
     }
 
     @IBAction private func pressResetButton(_ sender: Any) {
-        buttonAction(countType: countType.reset)
+        buttonAction(countType: CountType.reset)
     }
 
-    //設定画面への画面遷移
     @IBAction private func setting(_ sender: Any) {
-        let nextView = storyboard?.instantiateViewController(withIdentifier: "Next") as! SettingTableViewController
+        guard let nextView = storyboard?.instantiateViewController(withIdentifier: "setting") as? SettingTableViewController else {
+            return
+        }
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: true, completion: nil)
     }
 
-    private func buttonAction(countType: countType) {
+    private func buttonAction(countType: CountType) {
         var soundName = ""
-        
+
         switch countType {
         case .up:
             countNumberInt += 1
             soundName = "soundUp"
         case .down:
             countNumberInt -= 1
-            soundName = "soundUp"
+            soundName = "soundDown"
         case .reset:
-            countNumberInt = UserDefaultsKey.initialNumber.get() ?? Int()
-            soundName = "soundUp"
+            countNumberInt = Int(UserDefaultsKey.initialNumber.get() ?? String()) ?? 0
+            soundName = "soundReset"
         }
-        
-        // TextLabelへの表示
+
+        // TextLabelを上書き
         countNumberTextLabel.fadeTransition(0.1)
         countNumberTextLabel.text = String(countNumberInt)
-        
-        // 設定項目のSoundとVibrationを判定
-        if(UserDefaultsKey.sound.get() ?? Bool() == true){
+
+        // 設定項目のsoundとvibrationを判定
+        if UserDefaultsKey.sound.get() ?? Bool() == true {
             soundPlay.play(fileName: soundName, extentionName: "mp3")
         }
-        if(UserDefaultsKey.vibration.get() ?? Bool() == true){
+        if UserDefaultsKey.vibration.get() ?? Bool() == true {
             touchSense.vibrate()
         }
     }
-
 }
 
-//カウントアップのアニメーションをextention
+// カウントアップのアニメーションをextention
 extension UIView {
-    func fadeTransition(_ duration:CFTimeInterval) {
+    func fadeTransition(_ duration: CFTimeInterval) {
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name:
             CAMediaTimingFunctionName.easeInEaseOut)

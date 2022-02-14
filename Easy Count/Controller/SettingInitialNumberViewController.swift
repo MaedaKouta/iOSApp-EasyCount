@@ -8,49 +8,48 @@
 import UIKit
 
 class SettingInitialNumberViewController: UIViewController {
-    
-    @IBOutlet weak var InitialNumberTextField: UITextField!
-    @IBOutlet weak var decisionButton: UIButton!
-    @IBOutlet weak var errorTextLabel: UILabel!
-    
+
+    @IBOutlet private weak var initialNumberTextField: UITextField!
+    @IBOutlet private weak var decisionButton: UIButton!
+    @IBOutlet private weak var errorTextLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        InitialNumberTextField.setUnderLine()
+        // TextFieldをアンダーラインにする
+        initialNumberTextField.setUnderLine()
         decisionButton.layer.cornerRadius = 20
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        InitialNumberTextField.becomeFirstResponder()
+        // キーボードを表示させる
+        initialNumberTextField.becomeFirstResponder()
     }
-    
-    @IBAction func pressDecisionButton(_ sender: Any) {
-        if let initialNumber = Int(InitialNumberTextField.text ?? "") {
+
+    @IBAction private func pressDecisionButton(_ sender: Any) {
+        if let initialNumber = Int(initialNumberTextField.text ?? "") {
             errorTextLabel.text = ""
-            UserDefaultsKey.initialNumber.set(value: initialNumber)
+            UserDefaultsKey.initialNumber.set(value: String(initialNumber))
             self.navigationController?.popViewController(animated: true)
         } else {
             errorTextLabel.text = "⚠適切な数値を入力して下さい"
+            initialNumberTextField.endEditing(true)
         }
-        
-        
     }
-    
-    
-    
+
 }
 
 extension UITextField {
     func setUnderLine() {
         // 枠線を非表示にする
         borderStyle = .none
-               let underline = UIView()
-               // heightにはアンダーラインの高さを入れる
+        let underline = UIView()
+        // heightにはアンダーラインの高さを入れる
         underline.frame = CGRect(x: 0, y: frame.height, width: frame.width, height: 2.0)
-               // 枠線の色
-               underline.backgroundColor = .blue
-               addSubview(underline)
-               // 枠線を最前面に
-               bringSubviewToFront(underline)
+        // 枠線の色
+        underline.backgroundColor = .blue
+        addSubview(underline)
+        // 枠線を最前面に
+        bringSubviewToFront(underline)
     }
 }

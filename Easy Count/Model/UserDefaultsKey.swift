@@ -8,11 +8,11 @@
 import Foundation
 
 enum UserDefaultsKey: String {
-    case sound = "sound"
-    case vibration = "vibration"
-    case initialNumber = "initialNumber"
-    case screenLock = "screenLock"
-    case countNumber = "countNumber"
+    case sound
+    case vibration
+    case initialNumber
+    case screenLock
+    case countNumber
 
     func get<T>() -> T? {
         return UserDefaults.standard.object(forKey: self.rawValue) as? T
