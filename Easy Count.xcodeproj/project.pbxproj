@@ -43,6 +43,7 @@
 		B999A0B526BCE5D4007BB4CA /* SoundPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlay.swift; sourceTree = "<group>"; };
 		B999A0B726BCE9E4007BB4CA /* soundReset.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundReset.mp3; sourceTree = "<group>"; };
 		B99DF88526C01BAB00D3A61B /* Gradation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradation.swift; sourceTree = "<group>"; };
+		B9A1785927E01A0A00747B07 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B9C4CFF626BCF65400DB150F /* TouchSense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchSense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +82,7 @@
 				B999A0B426BCE541007BB4CA /* Controller */,
 				B9646FE826BBC94200EA8736 /* LaunchScreen.storyboard */,
 				B9646FEB26BBC94200EA8736 /* Info.plist */,
+				B9A1785927E01A0A00747B07 /* .swiftlint.yml */,
 			);
 			path = "Easy Count";
 			sourceTree = "<group>";
@@ -132,6 +134,7 @@
 				B9646FD726BBC94100EA8736 /* Frameworks */,
 				B9646FD826BBC94100EA8736 /* Resources */,
 				B9E13CBD27BA53CD0024D82E /* ShellScript */,
+				B9A1785827E019B500747B07 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -191,6 +194,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B9A1785827E019B500747B07 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		B9E13CBD27BA53CD0024D82E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

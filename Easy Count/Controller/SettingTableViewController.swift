@@ -16,13 +16,11 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet private weak var versionLabel: UILabel!
 
     override func viewDidLoad() {
-        print("didload")
         super.viewDidLoad()
         versionLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print("willAppear")
         super.viewWillAppear(animated)
         soundSwitch.isOn = UserDefaultsKey.sound.get() ?? Bool()
         vibrationSwitch.isOn = UserDefaultsKey.vibration.get() ?? Bool()
