@@ -15,7 +15,7 @@ enum UserDefaultsKey: String {
     case countNumber
 
     func get<T>() -> T? {
-        return UserDefaults.standard.object(forKey: self.rawValue) as? T
+        UserDefaults.standard.object(forKey: self.rawValue) as? T
     }
 
     func set<T>(value: T) {
