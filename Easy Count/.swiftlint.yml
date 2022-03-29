@@ -1,0 +1,12 @@
+# デフォルトで無効化するルール
+disabled_rules:
+  - force_cast
+
+# デフォルトで有効化するルール
+opt_in_rules:
+  - implicit_return
+
+# 長文を許す
+line_length:
+  warning: 300
+  error: 500
