@@ -92,7 +92,8 @@ class ViewController: UIViewController {
         }
 
         // TextLabelを上書き
-        countNumberTextLabel.fadeTransition(0.1)
+        // アニメーション一度使わない方向でリリース
+        //countNumberTextLabel.fadeTransition(0.1)
         countNumberTextLabel.text = String(countNumberInt)
 
         // 設定項目のsoundとvibrationを判定
@@ -116,3 +117,4 @@ extension UIView {
         layer.add(animation, forKey: CATransitionType.fade.rawValue)
     }
 }
+
