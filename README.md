@@ -1,12 +1,12 @@
 # iOSApp「Easy Counter」
 
- <img width="130" alt="ロゴ" src="https://user-images.githubusercontent.com/82198916/141433937-92d03024-e701-4d85-878b-fe88ce5f2b76.png">
+ <img width="130" alt="ロゴ" src="https://user-images.githubusercontent.com/82198916/163210555-3182f930-b184-4681-8150-1f6aa3478dd2.png">
 画面の左右でカウントの減少と増加を分けることができます。<br>
 タップの効果音や触覚フィードバックも利用することができます。
 
 # DEMO
 
- <img width="130" alt="画像１" src="https://user-images.githubusercontent.com/82198916/141433893-991e133a-7e87-4bf2-8ac6-db58852db6b0.jpg"> <img width="130" alt="画像2" src="https://user-images.githubusercontent.com/82198916/141433898-d018c897-87e4-4d75-8759-447d91a2feb2.jpg"> <img width="130" alt="画像3" src="https://user-images.githubusercontent.com/82198916/141433885-5ce8e1db-92fb-46f0-9320-31836429a482.jpg">
+ <img width="130" alt="画像１" src="https://user-images.githubusercontent.com/82198916/163210942-6679f147-3b5c-4aef-8a00-07040c746a7d.png"> <img width="130" alt="画像2" src="https://user-images.githubusercontent.com/82198916/163210951-8265d5c9-538a-4d87-a38b-4d9177a0ab92.png"> <img width="130" alt="画像3" src="https://user-images.githubusercontent.com/82198916/163210966-3fa82ba9-dcaf-498a-bf0f-3f0ba55bc14c.png">
 <br><br>
 下記のリンクからインストールしてお試し下さい。<br>
 [>>AppStoreからのインストールはこちら](https://apps.apple.com/jp/app/easy-count/id1580335092)
@@ -33,4 +33,4 @@ AppStoreレビューからフィードバックをいただければ幸いです
 # Author
 
 * 前田 航汰
-* お問い合わせ：[https://tetoblog.org/contact/](https://tetoblog.org/contact/)
+* 公式サポートページ：[https://tetoblog.org/easycount/](https://tetoblog.org/easycount/)
