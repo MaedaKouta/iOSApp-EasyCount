@@ -79,19 +79,14 @@ class SettingTableViewController: UITableViewController {
         // 初期化処理
         let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
 
-        // 使用しないアクティビティタイプ
-        let excludedActivityTypes = [
-            UIActivity.ActivityType.postToFacebook,
-            UIActivity.ActivityType.postToTwitter,
-            UIActivity.ActivityType.message,
-            UIActivity.ActivityType.saveToCameraRoll,
-            UIActivity.ActivityType.print
-        ]
+        // iPadでクラッシュするため、iPadのみレイアウトの変更
+        if let popoverController = activityVC.popoverPresentationController {
+            popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        }
+        self.present(activityVC, animated: true)
 
-        activityVC.excludedActivityTypes = excludedActivityTypes
-
-        // UIActivityViewControllerを表示
-        self.present(activityVC, animated: true, completion: nil)
     }
 
     @IBAction private func back(_ sender: Any) {
